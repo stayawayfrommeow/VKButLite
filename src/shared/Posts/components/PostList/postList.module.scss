@@ -1,0 +1,12 @@
+.root {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+
+  .subGrid {
+    height: fit-content;
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 1rem;
+  }
+}

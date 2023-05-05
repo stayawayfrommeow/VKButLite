@@ -1,0 +1,61 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+
+  .profilePic {
+    border-radius: 0.5rem;
+    height: 12.5rem;
+    width: 12.5rem;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .infoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: -1rem;
+    padding-left: 2rem;
+    background-color: white;
+    flex: 1;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .name {
+        font-size: xx-large;
+      }
+      ul {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        li {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          .accented {
+            color: #38bdf8;
+          }
+          .link {
+            color: #38bdf8;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .controls {
+      padding-right: 1rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}

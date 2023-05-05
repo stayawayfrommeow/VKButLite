@@ -1,0 +1,26 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 4rem;
+  background-color: #bae6fd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  .container {
+    display: flex;
+    width: 100%;
+    max-width: 70rem;
+    justify-content: space-between;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}

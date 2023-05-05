@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 0.5rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 10rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  height: fit-content;
+}

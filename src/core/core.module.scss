@@ -1,0 +1,19 @@
+.root {
+  width: 100%;
+  background-color: #f0f9ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5rem;
+    width: 100%;
+    max-width: 70rem;
+    gap: 2rem;
+  }
+}
