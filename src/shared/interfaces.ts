@@ -1,12 +1,11 @@
 export interface iUser {
   id: string;
-  profileImage: string;
-  firstName: string;
-  secondName: string;
-  age: string;
-  city: string;
-  university: string;
-  postIds: string[];
+  profileImage: string | null;
+  firstName: string | null;
+  secondName: string | null;
+  age: string | null;
+  city: string | null;
+  university: string | null;
   friendIds: string[];
 }
 
@@ -53,4 +52,19 @@ export interface iMessage {
   replayTo: string | null;
   isViewed: boolean;
   attachment: iAttachment | null;
+}
+
+export interface iLogin {
+  login: string;
+  password: string;
+  register: boolean;
+}
+
+export interface iLoginResponse {
+  token: string;
+  user: iUser;
+}
+
+export interface iRegisterResponse {
+  token: string;
 }
