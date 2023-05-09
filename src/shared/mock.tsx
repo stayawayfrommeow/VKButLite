@@ -1,6 +1,6 @@
 /* user */
 
-import { iAttachment, iPost, iUserShort } from './interfaces';
+import { iAttachment, iPost, iUserInfo, iUserShort } from './interfaces';
 
 export const myUser = {
   id: '1',
@@ -162,3 +162,13 @@ export const messageHistory = [
     attachment: null,
   },
 ];
+
+export const userInfoPlaceholder: iUserInfo = {
+  age: 'newborn',
+  city: 'unknown',
+  firstName: 'new',
+  profileImage: myUser.profileImage,
+  secondName: 'user',
+  university: 'unknown',
+  friendIds: [],
+};

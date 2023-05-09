@@ -3,17 +3,17 @@ import style from './login.module.scss';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Controller, useForm, useWatch } from 'react-hook-form';
-import { iLogin, iLoginResponse } from '../../shared/interfaces';
+import { iLogin, iLoginResponse, iUser } from '../../shared/interfaces';
 import useLogin from '../../shared/hooks/useLogin';
 import useRegister from '../../shared/hooks/useRegister';
 import Cookies from 'js-cookie';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { useUser } from '../../shared/hooks/useUser';
 import { useEffect, useState } from 'react';
+import { useUser } from '../../App';
 
 export default function Login() {
   const label = { inputProps: { 'aria-label': 'register switch' } };
-  const { user, setUser } = useUser();
+  const userCtx = useUser();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { control, setValue } = useForm({
@@ -50,16 +50,11 @@ export default function Login() {
       const res = await loginQuery.refetch();
       if (res.isSuccess) {
         Cookies.set('_token', res.data.token);
-        setUser(res.data.user);
-        navigate('/profile');
+        userCtx.setUser(res.data.user);
+        navigate(`/${res.data.user.id}`);
       }
     }
   };
-
-  // const registerQuery = useQuery({
-  //   queryKey: ['register'],
-  //   queryFn: () => registerUser(),
-  // });
 
   return (
     <div className={style.root}>

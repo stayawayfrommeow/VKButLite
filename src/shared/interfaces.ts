@@ -1,5 +1,6 @@
 export interface iUser {
   id: string;
+  login: string;
   profileImage: string | null;
   firstName: string | null;
   secondName: string | null;
@@ -30,6 +31,19 @@ export interface iAttachment {
   textId: string;
   id: string;
   contentUrl: string;
+}
+
+export interface iFileResponse {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  stream: any;
+  destination: string;
+  filename: string;
+  path: string;
+  buffer: any;
 }
 
 export interface iDialogShort {
@@ -67,4 +81,29 @@ export interface iLoginResponse {
 
 export interface iRegisterResponse {
   token: string;
+}
+
+export interface iUserContext {
+  user: iUser;
+  setUser: React.Dispatch<React.SetStateAction<iUser>>;
+}
+
+export interface iUserInfo {
+  profileImage: string;
+  firstName: string;
+  secondName: string;
+  age: string;
+  city: string;
+  university: string;
+  friendIds: string[];
+}
+
+export interface iUpdateMe {
+  id: string | null;
+  profileImage: string | null;
+  firstName: string | null;
+  secondName: string | null;
+  age: string | null;
+  city: string | null;
+  university: string | null;
 }

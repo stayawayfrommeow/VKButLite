@@ -16,7 +16,7 @@ const registerUser = async (data: iLogin): Promise<iRegisterResponse> => {
 
 export default function useRegister(data: iLogin) {
   return useQuery({
-    queryKey: ['login', data],
+    queryKey: ['register', data],
     queryFn: () => registerUser(data),
     enabled: false,
     retry: false,
