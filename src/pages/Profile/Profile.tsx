@@ -37,12 +37,12 @@ export default function Profile() {
   // }, [id]);
   useEffect(() => {
     if (user && userCtx) {
-      console.log(userCtx);
+      // console.log(userCtx);
 
       if (user?.id === userCtx.user?.id) {
         setIsMe(true);
       }
-      if (userCtx.user?.friendIds.includes(user?.id.toString())) {
+      if (userCtx.user?.friendIds?.includes(user?.id.toString())) {
         setIsFriend(true);
       } else {
         setIsFriend(false);

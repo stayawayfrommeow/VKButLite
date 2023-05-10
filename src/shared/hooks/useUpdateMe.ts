@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { iLogin, iLoginResponse, iUpdateMe, iUser } from '../interfaces';
 import Cookies from 'js-cookie';
+import { BACKEND_URL } from '../constants';
 
 const updateMe = async (data: iUpdateMe): Promise<iUser> => {
   const prettyData = {
@@ -15,7 +16,7 @@ const updateMe = async (data: iUpdateMe): Promise<iUser> => {
   };
 
   const response = await axios({
-    url: `http://localhost:4000/users`,
+    url: `${BACKEND_URL}/users`,
     method: 'post',
     headers: {
       Authorization: `Bearer ${Cookies.get('_token')}`,

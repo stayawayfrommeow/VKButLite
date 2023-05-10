@@ -6,6 +6,7 @@
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   border-radius: 0.5rem;
   padding: 1rem;
+  max-width: 100%;
 
   .top {
     display: flex;
@@ -18,5 +19,10 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+  }
+
+  .pic {
+    max-width: 56rem;
+    align-self: center;
   }
 }

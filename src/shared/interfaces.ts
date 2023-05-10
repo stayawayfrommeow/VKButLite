@@ -21,16 +21,9 @@ export interface iPost {
   id: string;
   title: string;
   text: string;
-  attach: iAttachment | null;
-  author: iUserShort;
+  attachment: string | null;
+  author: iUser;
   likes: number;
-}
-
-export interface iAttachment {
-  type: 'image';
-  textId: string;
-  id: string;
-  contentUrl: string;
 }
 
 export interface iFileResponse {
@@ -65,7 +58,7 @@ export interface iMessage {
   authorId: string;
   replayTo: string | null;
   isViewed: boolean;
-  attachment: iAttachment | null;
+  // attachment: iAttachment | null;
 }
 
 export interface iLogin {
@@ -106,4 +99,10 @@ export interface iUpdateMe {
   age: string | null;
   city: string | null;
   university: string | null;
+}
+
+export interface iCreatePost {
+  title: string | null;
+  text: string | null;
+  attach: string | null;
 }

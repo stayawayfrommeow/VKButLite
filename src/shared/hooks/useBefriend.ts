@@ -3,9 +3,11 @@ import axios, { AxiosResponse } from 'axios';
 import { iLogin, iLoginResponse, iUpdateMe, iUser } from '../interfaces';
 import Cookies from 'js-cookie';
 
+import { BACKEND_URL } from '../constants';
+
 const befriend = async (id: string): Promise<iUser> => {
   const response = await axios({
-    url: `http://localhost:4000/users/befriend`,
+    url: `${BACKEND_URL}/users/befriend`,
     method: 'post',
     headers: {
       Authorization: `Bearer ${Cookies.get('_token')}`,

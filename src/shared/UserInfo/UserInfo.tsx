@@ -6,6 +6,8 @@ import { iUser, iUserInfo } from '../interfaces';
 import UpdateUser from './components/UpdateUser';
 import useBefriend from '../hooks/useBefriend';
 import { useUserCore } from '../../core/Core';
+import useUnfriend from '../hooks/useUnfriend';
+import { BACKEND_URL } from '../constants';
 
 interface iProps {
   user: iUser | null;
@@ -16,14 +18,49 @@ interface iProps {
 export default function UserInfo({ user, isMe, isFriend }: iProps) {
   const [userInfo, setUserInfo] = useState<iUserInfo>(userInfoPlaceholder);
   const [openUpdateDialog, setOpenUpdateDialog] = useState<boolean>(false);
+  const [toaster, setToaster] = useState<boolean>(false);
+  const [toasterMessage, setToasterMessage] = useState<string>('');
+  const befriendQuery = useBefriend(user?.id as string);
+  const unfriendQuery = useUnfriend(user?.id as string);
+  const userCtx = useUserCore();
+
+  const handleAdd = () => {
+    setToasterMessage('friend added');
+    befriendQuery.refetch().then((res) => {
+      if (res.isSuccess) {
+        setToaster(true);
+        userCtx.setUser(res.data);
+      }
+    });
+  };
+  const handleDelete = () => {
+    setToasterMessage('friend deleted');
+    unfriendQuery.refetch().then((res) => {
+      if (res.isSuccess) {
+        setToaster(true);
+        userCtx.setUser(res.data);
+      }
+    });
+  };
+
+  const buttonSet = [
+    isMe && !isFriend && 'edit',
+    // !isMe && isFriend && 'message',
+    !isMe && !isFriend && 'add',
+    !isMe && isFriend && 'delete',
+  ];
+
+  const handleCloseToast = () => {
+    setToaster(false);
+  };
 
   const handleCloseUpdateDialog = () => {
     setOpenUpdateDialog(false);
   };
 
   const handleOpenUpdateDialog = () => {
-    setOpenUpdateDialog(true);
     setToasterMessage('changes saved');
+    setOpenUpdateDialog(true);
   };
 
   const getButtonFunc = (name: string) => {
@@ -38,7 +75,7 @@ export default function UserInfo({ user, isMe, isFriend }: iProps) {
         return () => handleAdd();
 
       case 'delete':
-        return () => {};
+        return () => handleDelete();
     }
   };
 
@@ -48,7 +85,7 @@ export default function UserInfo({ user, isMe, isFriend }: iProps) {
       city: user?.city ? user.city : 'unknown',
       firstName: user?.firstName ? user.firstName : 'new',
       profileImage: user?.profileImage
-        ? 'http://localhost:4000/' + user.profileImage
+        ? `${BACKEND_URL}/` + user.profileImage
         : myUser.profileImage,
       secondName: user?.secondName ? user.secondName : 'user',
       university: user?.university ? user.university : 'unknown',
@@ -56,36 +93,9 @@ export default function UserInfo({ user, isMe, isFriend }: iProps) {
     });
   }, [user]);
 
-  const buttonSet = [
-    isMe && !isFriend && 'edit',
-    // !isMe && isFriend && 'message',
-    !isMe && !isFriend && 'add',
-    !isMe && isFriend && 'delete',
-  ];
-
-  const [toaster, setToaster] = useState<boolean>(false);
-  const [toasterMessage, setToasterMessage] = useState<string>('');
-
-  const handleCloseToast = () => {
-    setToaster(false);
-  };
-
-  const befriendQuery = useBefriend(user?.id as string);
-  const userCtx = useUserCore();
-
-  const handleAdd = () => {
-    setToasterMessage('friend added');
-    befriendQuery.refetch().then((res) => {
-      if (res.isSuccess) {
-        setToaster(true);
-        userCtx.setUser(res.data);
-      }
-    });
-  };
-
-  useEffect(() => {
-    console.log(userInfo.profileImage);
-  }, [userInfo]);
+  // useEffect(() => {
+  //   console.log(userInfo.profileImage);
+  // }, [userInfo]);
 
   return (
     <div className={style.root}>

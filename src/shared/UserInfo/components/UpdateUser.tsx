@@ -8,6 +8,8 @@ import useUpdateMe from '../../hooks/useUpdateMe';
 import { useUserCore } from '../../../core/Core';
 import { iUpdateMe } from '../../interfaces';
 import useGetMe from '../../hooks/useGetMe';
+import { updateUserFormDefault } from '../../mock';
+import { BACKEND_URL } from '../../constants';
 
 interface iProps {
   open: boolean;
@@ -30,27 +32,12 @@ type iNoneField = (typeof noneFields)[number];
 
 export default function UpdateUser({ open, handleClose, setToaster }: iProps) {
   const { user, setUser } = useUserCore();
-
   const { control, setValue } = useForm({
-    defaultValues: {
-      firstName: '',
-      secondName: '',
-      age: '',
-      city: '',
-      university: '',
-      profileImage: '',
-      id: '',
-    },
+    defaultValues: updateUserFormDefault,
   });
   const data = useWatch({ control: control });
-
-  useEffect(() => {
-    user &&
-      Object.entries(user).map((item) => {
-        setValue(item[0] as iTextField, item[1] ? item[1] : '');
-      });
-  }, [user]);
-
+  const updateQuery = useUpdateMe(data as iUpdateMe);
+  const meQuery = useGetMe();
   const [file, setFile] = useState<File | null>(null);
   const [fileURL, setFileURL] = useState<string>('');
   const uploadQuery = useUploadFile(file as File);
@@ -59,11 +46,19 @@ export default function UpdateUser({ open, handleClose, setToaster }: iProps) {
   const handleDrop = (file: File[]) => {
     setFile(file[0]);
   };
+  const dropzone = useDropzone({ onDrop: handleDrop });
 
   const handleDelete = () => {
     setFile(null);
     setFileURL('');
   };
+
+  useEffect(() => {
+    user &&
+      Object.entries(user).map((item) => {
+        setValue(item[0] as iTextField, item[1] ? item[1] : '');
+      });
+  }, [user]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -80,12 +75,6 @@ export default function UpdateUser({ open, handleClose, setToaster }: iProps) {
   useEffect(() => {
     setValue('profileImage', fileURL);
   }, [fileURL]);
-
-  const dropzone = useDropzone({ onDrop: handleDrop });
-
-  const updateQuery = useUpdateMe(data as iUpdateMe);
-
-  const meQuery = useGetMe();
 
   const handleUpdate = () => {
     updateQuery.refetch();
@@ -152,7 +141,7 @@ export default function UpdateUser({ open, handleClose, setToaster }: iProps) {
           )}
           {fileURL && (
             <>
-              <img src={`http://localhost:4000/${fileURL}`} />
+              <img src={`${BACKEND_URL}/${fileURL}`} />
               <span>{file?.name}</span>
             </>
           )}

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { iLogin, iLoginResponse, iRegisterResponse } from '../interfaces';
+import { BACKEND_URL } from '../constants';
 
 const registerUser = async (data: iLogin): Promise<iRegisterResponse> => {
   const response = await axios({
-    url: 'http://localhost:4000/auth/register',
+    url: `${BACKEND_URL}/auth/register`,
     method: 'post',
     data: {
       login: data.login,

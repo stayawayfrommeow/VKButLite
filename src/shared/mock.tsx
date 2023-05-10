@@ -172,3 +172,19 @@ export const userInfoPlaceholder: iUserInfo = {
   university: 'unknown',
   friendIds: [],
 };
+
+export const updateUserFormDefault = {
+  firstName: '',
+  secondName: '',
+  age: '',
+  city: '',
+  university: '',
+  profileImage: '',
+  id: '',
+};
+
+export const createPostDefault = {
+  title: '',
+  text: '',
+  attach: '',
+};

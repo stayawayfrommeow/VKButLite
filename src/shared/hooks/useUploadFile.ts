@@ -6,13 +6,14 @@ import {
   iLoginResponse,
   iRegisterResponse,
 } from '../interfaces';
+import { BACKEND_URL } from '../constants';
 
 const uploadFile = async (file: File): Promise<iFileResponse> => {
   const formData = new FormData();
   formData.append('file', file);
 
   const response = await axios({
-    url: 'http://localhost:4000/files',
+    url: `${BACKEND_URL}/files`,
     method: 'post',
     data: formData,
     headers: {

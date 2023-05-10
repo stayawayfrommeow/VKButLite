@@ -13,6 +13,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    .likes {
+      min-width: fit-content;
+    }
+  }
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -23,6 +30,9 @@
   color: #38bdf8;
   text-decoration: underline;
   cursor: pointer;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .postFull {
@@ -33,6 +43,7 @@
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   border-radius: 0.5rem;
   padding: 1rem;
+
   .top {
     display: flex;
     flex-direction: row;
@@ -44,6 +55,9 @@
       align-items: start;
       .title {
         font-size: xx-large;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-break: anywhere;
       }
       ul {
         display: flex;
@@ -56,10 +70,14 @@
         }
       }
     }
+
     .buttons {
       display: flex;
       flex-direction: row;
       gap: 1rem;
     }
+  }
+  .text {
+    overflow-wrap: break-word;
   }
 }
